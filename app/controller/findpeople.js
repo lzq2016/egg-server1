@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = app => {
-    class FindCarController extends app.Controller {
-        * getcar() {
+    class FindPeopleController extends app.Controller {
+        * getpeople() {
             const openid = this.ctx.query.openid;
-            var result = yield this.ctx.service.post.getPost(openid,1);
+            var result = yield this.ctx.service.post.getPost(openid,2);
             if(result){
                 this.ctx.body = {code:1,result};
             }
@@ -14,10 +14,11 @@ module.exports = app => {
             }
         }
 
-        * updatecar() {
+        * updatepeople() {
             const ctx = this.ctx;
             const openid = ctx.query.openid;
-            var result = yield ctx.service.post.updatePost(ctx.request.body, openid,1);
+            var result = yield ctx.service.post.updatePost(ctx.request.body, openid,2);
+            console.log(result,"result");
             if (result[0] == 1) {
                 ctx.body = {code: 1};
             } else {
@@ -25,7 +26,7 @@ module.exports = app => {
             }
         }
 
-        * createcar() {
+        * createpeople() {
             const ctx = this.ctx;
             var result = yield ctx.service.post.createPost(ctx.request.body);
             if (result.dataValues.id) {
@@ -41,5 +42,5 @@ module.exports = app => {
         }
     }
 
-    return FindCarController;
+    return FindPeopleController;
 };

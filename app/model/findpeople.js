@@ -3,7 +3,7 @@
 module.exports = app => {
     const { STRING, INTEGER,BOOLEAN, DATE } = app.Sequelize;
 
-    const Findcar = app.model.define('findcar', {
+    const Findpeople = app.model.define('findpeople', {
         id: {
             type: INTEGER,
             primaryKey: true,
@@ -12,18 +12,19 @@ module.exports = app => {
         openid:STRING,
         start_time:DATE,
         from_place:STRING,
+        mid_place:STRING,
         to_place:STRING,
+        car:STRING,
         user_count:INTEGER,
         note:STRING,
         name:STRING,
         sex:BOOLEAN,
-        phone:STRING,
-        type:BOOLEAN
+        phone:STRING
     });
 
-    Findcar.prototype.associate = function() {
+    Findpeople.prototype.associate = function() {
         app.model.Findcar.belongsTo(app.model.User, { foreignKey: 'openid',targetKey:'openid' });
     };
 
-    return Findcar;
+    return Findpeople;
 };

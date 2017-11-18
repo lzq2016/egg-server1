@@ -3,7 +3,7 @@
 module.exports = app => {
     return class Findcar extends app.Service {
         * getCar(openid) {
-            let user = yield this.ctx.model.Findcar.findOne({where: {openid: openid}});
+            let user = yield this.ctx.model.Findcar.findOne({where: {openid: openid,type:1}});
             if (!user) {
                 let user = this.createcar(openid);
             }
@@ -15,13 +15,13 @@ module.exports = app => {
                 this.ctx.throw(404, ' 创建createcar openid不存在');
             }
 
-            return yield this.ctx.model.Findcar.create({openid: openid});
+            return yield this.ctx.model.Findcar.create({openid: openid,type:1});
         }
         * updatecar(value,openid) {
             if (!openid) {
                 this.ctx.throw(404, ' 更新createcar openid不存在');
             }
-            return yield this.ctx.model.Findcar.update(value,{where:{openid: openid}});
+            return yield this.ctx.model.Findcar.update(value,{where:{openid: openid,type:1}});
         }
     }
 };

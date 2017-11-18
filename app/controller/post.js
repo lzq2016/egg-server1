@@ -3,11 +3,19 @@
 module.exports = app => {
     class PostController extends app.Controller {
 
-        * mypost() {
-            // const ctx = this.ctx;
-            // ctx.logger.debug('debug info');
-            // ctx.logger.debug(ctx.query);
-            this.ctx.body = yield this.ctx.service.post.getPosts(this.ctx.query);
+        * myposts() {
+            let result = yield this.ctx.service.post.getPosts(this.ctx.query);
+            if(result)
+            {
+                this.ctx.body = {
+                    code:1,
+                    data:result.rows
+                };
+            }else{
+                this.ctx.body = {
+                    code:0
+                };
+            }
         }
     }
     return PostController;
